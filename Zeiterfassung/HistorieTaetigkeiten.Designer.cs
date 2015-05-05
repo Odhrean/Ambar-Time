@@ -1,6 +1,6 @@
 ﻿namespace Zeiterfassung
 {
-    partial class Taetigkeiten
+    partial class HistorieTaetigkeiten
     {
         /// <summary>
         /// Erforderliche Designervariable.
@@ -40,10 +40,10 @@
             this.grid_Taetigkeiten.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedHeaders;
             this.grid_Taetigkeiten.BackgroundColor = System.Drawing.SystemColors.Window;
             this.grid_Taetigkeiten.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_Taetigkeiten.Location = new System.Drawing.Point(9, 1);
+            this.grid_Taetigkeiten.Location = new System.Drawing.Point(1, 1);
             this.grid_Taetigkeiten.Name = "grid_Taetigkeiten";
             this.grid_Taetigkeiten.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid_Taetigkeiten.Size = new System.Drawing.Size(965, 607);
+            this.grid_Taetigkeiten.Size = new System.Drawing.Size(959, 601);
             this.grid_Taetigkeiten.TabIndex = 0;
             // 
             // btn_close
@@ -58,7 +58,7 @@
             this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
-            // Taetigkeiten
+            // HistorieTaetigkeiten
             // 
             this.AcceptButton = this.btn_close;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -69,7 +69,7 @@
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.grid_Taetigkeiten);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Taetigkeiten";
+            this.Name = "HistorieTaetigkeiten";
             this.Opacity = 0.85D;
             this.Text = "Taetigkeiten";
             this.TopMost = true;

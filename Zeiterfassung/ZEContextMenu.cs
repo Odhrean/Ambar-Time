@@ -55,7 +55,7 @@ namespace Zeiterfassung
             MenuItem alleTaetigkeiten = new MenuItem("Historie");
             alleTaetigkeiten.Click += (o, i) =>
             {
-                new Taetigkeiten().Show();
+                new HistorieTaetigkeiten().Show();
             };
             weitere.MenuItems.Add(alleTaetigkeiten);
 
