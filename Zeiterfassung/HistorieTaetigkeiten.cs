@@ -27,6 +27,7 @@ namespace Zeiterfassung
         {
             String sql = @"select	
                         t.ID ID_Taetigkeit,
+                        t.status Status,
 		                t.Taetigkeit Taetigkeit,
                        k.[Kategorie] Kategorie,
 					   m.start Start,m.ende Ende,	datediff(mi,m.start,ISNULL(m.ende,GETDATE())) Mi		  
@@ -39,12 +40,12 @@ namespace Zeiterfassung
                        +"order by isnull(m.ende,getdate()) desc";
 
             clsDatabase db = new clsDatabase(sql, "Taetigkeiten->initGrid", clsDatabase.SqlDataAdapter);
-            DataSet ds = new DataSet();
-            db.Fill(ds, "dummy_table");
+            DataTable tbl_taetigkeiten = new DataTable();
+            db.getDataAdapter().Fill(tbl_taetigkeiten);
+
             db.close();
 
-            grid_Taetigkeiten.DataSource = ds;
-            grid_Taetigkeiten.DataMember = "dummy_table";
+            grid_Taetigkeiten.DataSource = tbl_taetigkeiten;
 
             sql = @"select Kategorie "
                 + "from [zeiterfassung].[Kategorie] k "
@@ -53,10 +54,14 @@ namespace Zeiterfassung
 
             db = new clsDatabase(sql, "Taetigkeiten->initGrid[Kategorie]", clsDatabase.SqlDataAdapter);
             DataTable kategorie = new DataTable();
-            //db.Fill(kategorie, "dummy_table");
+
+            //tbl_taetigkeiten.TableName = "Zeitverlauf";
+            //tbl_taetigkeiten.WriteXml(@"c:\tmp\out.xml");
             db.getDataAdapter().Fill(kategorie);
-            //db.FillDataGridViewThread(grid_Taetigkeiten);
+
             db.close();
+
+            tbl_taetigkeiten.RowDeleting += tbl_taetigkeiten_RowDeleting;
 
             grid_Taetigkeiten.CellEndEdit += new DataGridViewCellEventHandler(grid_Taetigkeiten_CellEndEdit);
             DataGridViewComboBoxColumn kategorieColumn = new DataGridViewComboBoxColumn();
@@ -68,16 +73,16 @@ namespace Zeiterfassung
             kategorieColumn.DisplayMember = kategorieColumn.ValueMember;
             
             kategorieColumn.FlatStyle = FlatStyle.Flat;
-
-            grid_Taetigkeiten.Columns["ID_Taetigkeit"].ReadOnly = true;
+                        
             grid_Taetigkeiten.Columns["ID_Taetigkeit"].Visible = false;
+            grid_Taetigkeiten.Columns["Status"].ReadOnly = true;
             grid_Taetigkeiten.Columns.Remove("Kategorie");
-            grid_Taetigkeiten.Columns.Insert(2, kategorieColumn);
+            grid_Taetigkeiten.Columns.Insert(3, kategorieColumn);
             grid_Taetigkeiten.Columns["Start"].ReadOnly = false;
             grid_Taetigkeiten.Columns["Ende"].ReadOnly = false;
             grid_Taetigkeiten.Columns["Mi"].ReadOnly = true;
-            grid_Taetigkeiten.Columns["ID_zeitmessung"].ReadOnly = true;
             grid_Taetigkeiten.Columns["ID_zeitmessung"].Visible = false;
+
 
             DataGridViewButtonColumn oeffnen = new DataGridViewButtonColumn();
             {
@@ -93,9 +98,44 @@ namespace Zeiterfassung
                 
             }
             grid_Taetigkeiten.Columns.Add(oeffnen);
+            /*
+            DataGridViewCheckBoxColumn aktiv = new DataGridViewCheckBoxColumn();
+            {
+                aktiv.HeaderText = "aktiv";
+                //aktiv.AutoSizeMode =  DataGridViewAutoSizeColumnMode.DisplayedCells;
+                //aktiv.FlatStyle = FlatStyle.Standard;
+                //aktiv.ThreeState = true;
+                aktiv.TrueValue = 1;
+                aktiv.FalseValue = 2;
+                aktiv.DataPropertyName = "Status";
+                aktiv.ValueType = typeof(byte);
+                aktiv.ReadOnly = true;
+                //aktiv.CellTemplate = new DataGridViewCheckBoxCell();
+                //aktiv.CellTemplate.Style.BackColor = Color.Beige;
+                //aktiv.DisplayIndex = 1;
+            }
+            //grid_Taetigkeiten.Columns.Remove("Status");
+            grid_Taetigkeiten.Columns.Insert(1, aktiv);
+            */
             grid_Taetigkeiten.CellClick += grid_Taetigkeiten_CellClick;
+            Debug.Print("{0} : {1}", "Status", grid_Taetigkeiten.Columns["Status"].Width);
+            Debug.Print("{0} : {1}", "Taetigkeit", grid_Taetigkeiten.Columns["Taetigkeit"].Width);
+            Debug.Print("{0} : {1}", "Kategorie", grid_Taetigkeiten.Columns["Kategorie"].Width);
+            Debug.Print("{0} : {1}", "Start", grid_Taetigkeiten.Columns["Start"].Width);
+            Debug.Print("{0} : {1}", "Ende", grid_Taetigkeiten.Columns["Ende"].Width);
+            Debug.Print("{0} : {1}", "btnOeffnen", grid_Taetigkeiten.Columns["btnOeffnen"].Width);
             
         }
+
+        private void tbl_taetigkeiten_RowDeleting(object sender, DataRowChangeEventArgs e)
+        {
+            Debug.Print("Delete Zeitmessung-ID: {0}", e.Row["ID_zeitmessung"]);
+            String sql = "delete from zeiterfassung.zeitmessung where ID=" + e.Row["ID_zeitmessung"];
+            //clsDatabase db = new clsDatabase(sql, "tbl_taetigkeiten_RowDeleting->DELETE");
+            //db.close();
+
+        }
+
 
         private void grid_Taetigkeiten_CellClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -37,7 +37,7 @@
             // 
             this.grid_Taetigkeiten.AllowUserToAddRows = false;
             this.grid_Taetigkeiten.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.grid_Taetigkeiten.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedHeaders;
+            this.grid_Taetigkeiten.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.grid_Taetigkeiten.BackgroundColor = System.Drawing.SystemColors.Window;
             this.grid_Taetigkeiten.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_Taetigkeiten.Location = new System.Drawing.Point(1, 1);
@@ -50,9 +50,9 @@
             // 
             this.btn_close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_close.Location = new System.Drawing.Point(885, 568);
+            this.btn_close.Location = new System.Drawing.Point(1, 1);
             this.btn_close.Name = "btn_close";
-            this.btn_close.Size = new System.Drawing.Size(75, 23);
+            this.btn_close.Size = new System.Drawing.Size(40, 23);
             this.btn_close.TabIndex = 1;
             this.btn_close.Text = "X";
             this.btn_close.UseVisualStyleBackColor = false;

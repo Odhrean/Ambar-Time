@@ -6,7 +6,7 @@
       <Value Profile="(Default)">Zeiterfassung</Value>
     </Setting>
     <Setting Name="Version" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">1.7</Value>
+      <Value Profile="(Default)">1.8</Value>
     </Setting>
     <Setting Name="DebugApp" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
