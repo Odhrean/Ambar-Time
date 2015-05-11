@@ -185,6 +185,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\edit_icon.png" />
+    <Content Include="Resources\edit.png" />
     <Content Include="Resources\ERPZeiterfassungIcon.gif" />
     <Content Include="Resources\ERPZeiterfassungIcon.png" />
     <Content Include="Resources\favicon_hell.ico" />

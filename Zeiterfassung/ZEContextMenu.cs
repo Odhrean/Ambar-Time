@@ -37,6 +37,7 @@ namespace Zeiterfassung
         public ContextMenu getContextMenu()
         {
             cm.MenuItems.Clear();
+            
             VistaMenu vistaMenu = new VistaMenu();
 
             foreach (var tatigkeit in offeneTaetigkeiten) {
@@ -80,6 +81,11 @@ namespace Zeiterfassung
 
         private void addMenuItem(Taetigkeit taetigkeit,VistaMenu vistaMenu)
         {
+
+            // Aktive Tätigkeit hier nicht anzeigen
+            if (taetigkeit.Equals(akt))
+                return;
+
             MenuItem mi = new MenuItem(taetigkeit.getTitel());
             MenuItem infos = new MenuItem(taetigkeit.getInfos());
             infos.Enabled = false;
@@ -125,6 +131,7 @@ namespace Zeiterfassung
             mi.MenuItems.Add(miStop);
 
             MenuItem miBearbeiten = new MenuItem("Tätigkeit editieren");
+            vistaMenu.SetImage(miBearbeiten, Properties.Resources.edit_icon);
             miBearbeiten.Click += (o, i) =>
             {
                 new EditTaetigkeit(taetigkeit).Show();                
@@ -205,6 +212,16 @@ namespace Zeiterfassung
                     this.pause();
                 };
                 cm.MenuItems.Add(pause);
+
+                MenuItem bearbeiten = new MenuItem();
+                bearbeiten.Text = "\"" + akt.getTitel() + "\" editieren";
+                vistaMenu.SetImage(bearbeiten, Properties.Resources.edit);
+                bearbeiten.Click += (o, i) =>
+                {
+                    new EditTaetigkeit(akt).Show();
+                };
+                cm.MenuItems.Add(bearbeiten);
+
 
             }
         }

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 //VistaMenu v1.8.1, created by Wyatt O'Day
 //Visit: http://wyday.com/vistamenu/
@@ -150,6 +151,7 @@ namespace wyDay.Controls
                         g.DrawImage(value, 0, 0, value.Width, value.Height);
 
                     prop.renderBmpHbitmap = renderBmp.GetHbitmap(Color.FromArgb(0, 0, 0, 0));
+                    Debug.Print("[SetImage] MenuItem: {0} -> Image set to Pointer {1}", mnuItem.Text, prop.renderBmpHbitmap);
                 }
 
                 if (formHasBeenIntialized)
@@ -172,6 +174,7 @@ namespace wyDay.Controls
 
         void AddVistaMenuItem(MenuItem mnuItem)
         {
+            Debug.Print("[AddVistaMenuItem] MenuItem: {0} BEGIN, menuParents[mnuItem.Parent]: {1}", mnuItem.Text, menuParents[mnuItem.Parent]);
             //get the bitmap children of the parent
             if (menuParents[mnuItem.Parent] == null)
             {
@@ -184,11 +187,13 @@ namespace wyDay.Controls
                 SetMenuInfo(new HandleRef(null, mnuItem.Parent.Handle), mnuInfo);
 
                 menuParents[mnuItem.Parent] = true;
+                Debug.Print("[AddVistaMenuItem] MenuItem: {0} SET", mnuItem.Text);
             }
         }
 
         void AddPreVistaMenuItem(MenuItem mnuItem)
         {
+            Debug.Print("[AddPreVistaMenuItem] MenuItem: {0} BEGIN", mnuItem.Text);
             if (menuParents[mnuItem.Parent] == null)
             {
                 menuParents[mnuItem.Parent] = true;
@@ -201,6 +206,7 @@ namespace wyDay.Controls
                         menu.DrawItem += MenuItem_DrawItem;
                         menu.MeasureItem += MenuItem_MeasureItem;
                         menu.OwnerDraw = true;
+                        Debug.Print("[AddPreVistaMenuItem] MenuItem: {0} SET", mnuItem.Text);
                     }
                 }
             }
