@@ -43,55 +43,19 @@ namespace Zeiterfassung.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DebugApp {
-            get {
-                return ((bool)(this["DebugApp"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("240")]
-        public int ConnectionTimeout {
-            get {
-                return ((int)(this["ConnectionTimeout"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KOE-DLZ-SQL-001.stute.loc;Initial Catalog=Personal;Persist Security I" +
-            "nfo=True;User ID=sa;Password=sqlserver;Connect Timeout=120;Application Name=Zeit" +
-            "erfassung")]
-        public string ConnectionString {
-            get {
-                return ((string)(this["ConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("$Revision: 395 $")]
+        [global::System.Configuration.DefaultSettingValueAttribute("$Revision: 397 $")]
         public string Build {
             get {
                 return ((string)(this["Build"]));
             }
-            set {
-                this["Build"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("$Date: 2015-05-05 15:40:59 +0200 (Di, 05. Mai 2015) $")]
+        [global::System.Configuration.DefaultSettingValueAttribute("$Date: 2015-05-12 19:35:40 +0200 (Di, 12. Mai 2015) $")]
         public string BuildDate {
             get {
                 return ((string)(this["BuildDate"]));
-            }
-            set {
-                this["BuildDate"] = value;
             }
         }
     }

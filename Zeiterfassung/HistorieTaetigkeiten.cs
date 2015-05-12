@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using STUTE.Database;
 
 namespace Zeiterfassung
 {
@@ -38,12 +39,12 @@ namespace Zeiterfassung
 					   join zeiterfassung.zeitmessung m on m.ID_Taetigkeit=t.ID
                        where a.Anwender='" + System.Security.Principal.WindowsIdentity.GetCurrent().Name + "' "
                        +"order by isnull(m.ende,getdate()) desc";
-
-            clsDatabase db = new clsDatabase(sql, "Taetigkeiten->initGrid", clsDatabase.SqlDataAdapter);
-            DataTable tbl_taetigkeiten = new DataTable();
-            db.getDataAdapter().Fill(tbl_taetigkeiten);
-
-            db.close();
+            DataTable tbl_taetigkeiten = null;
+            using(Database db = new Database(sql, "Taetigkeiten->initGrid", Database.SqlDataAdapter))
+            { 
+                tbl_taetigkeiten = new DataTable();
+                db.getDataAdapter().Fill(tbl_taetigkeiten);
+            }
 
             grid_Taetigkeiten.DataSource = tbl_taetigkeiten;
 
@@ -51,15 +52,14 @@ namespace Zeiterfassung
                 + "from [zeiterfassung].[Kategorie] k "
                 + "join [zeiterfassung].[Anwender] a on a.id=k.ID_Anwender "
                 + "where a.Anwender='" + System.Security.Principal.WindowsIdentity.GetCurrent().Name + "' ";
-
-            db = new clsDatabase(sql, "Taetigkeiten->initGrid[Kategorie]", clsDatabase.SqlDataAdapter);
-            DataTable kategorie = new DataTable();
-
-            //tbl_taetigkeiten.TableName = "Zeitverlauf";
-            //tbl_taetigkeiten.WriteXml(@"c:\tmp\out.xml");
-            db.getDataAdapter().Fill(kategorie);
-
-            db.close();
+            DataTable kategorie = null;
+            using(Database db = new Database(sql, "Taetigkeiten->initGrid[Kategorie]", Database.SqlDataAdapter))
+            { 
+                kategorie = new DataTable();
+                //tbl_taetigkeiten.TableName = "Zeitverlauf";
+                //tbl_taetigkeiten.WriteXml(@"c:\tmp\out.xml");
+                db.getDataAdapter().Fill(kategorie);
+            }
 
             tbl_taetigkeiten.RowDeleting += tbl_taetigkeiten_RowDeleting;
 
@@ -131,7 +131,7 @@ namespace Zeiterfassung
         {
             Debug.Print("Delete Zeitmessung-ID: {0}", e.Row["ID_zeitmessung"]);
             String sql = "delete from zeiterfassung.zeitmessung where ID=" + e.Row["ID_zeitmessung"];
-            //clsDatabase db = new clsDatabase(sql, "tbl_taetigkeiten_RowDeleting->DELETE");
+            //Database db = new Database(sql, "tbl_taetigkeiten_RowDeleting->DELETE");
             //db.close();
 
         }
@@ -168,8 +168,8 @@ namespace Zeiterfassung
                 Debug.Print("({0}) Edit Start {1} und Ende {2} ", grid_Taetigkeiten.Rows[e.RowIndex].Cells["ID_zeitmessung"].Value, grid_Taetigkeiten.Rows[e.RowIndex].Cells["Start"].Value, grid_Taetigkeiten.Rows[e.RowIndex].Cells["Ende"].Value);
                 String sql = "update zeiterfassung.zeitmessung set start='" + grid_Taetigkeiten.Rows[e.RowIndex].Cells["Start"].Value + "', ende=case when '" + grid_Taetigkeiten.Rows[e.RowIndex].Cells["Ende"].Value + "' != '' then '" + grid_Taetigkeiten.Rows[e.RowIndex].Cells["Ende"].Value + "' else null end where ID=" + grid_Taetigkeiten.Rows[e.RowIndex].Cells["ID_zeitmessung"].Value;
 
-                clsDatabase db = new clsDatabase(sql, "grid_Taetigkeiten_CellEndEdit->Edit");
-                db.close();
+                using (new Database(sql, "grid_Taetigkeiten_CellEndEdit->Edit")) { }
+               
             }
         }
 

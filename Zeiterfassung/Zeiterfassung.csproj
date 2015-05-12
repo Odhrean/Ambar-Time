@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeiterfassung</RootNamespace>
     <AssemblyName>Zeiterfassung</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -38,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -47,6 +49,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -88,9 +91,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="wyDay\OwnerDrawnMenu.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="HistorieTaetigkeiten.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,13 +103,9 @@
     <Compile Include="UpdateLink.Designer.cs">
       <DependentUpon>UpdateLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="wyDay\VistaMenu.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ZEContextMenu.cs" />
     <Compile Include="Taetigkeit.cs" />
     <Compile Include="ZeiterfassungNotifyApp.cs" />
-    <Compile Include="clsDatabase.cs" />
     <Compile Include="NeuErfassen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,7 +134,9 @@
     <EmbeddedResource Include="UpdateLink.resx">
       <DependentUpon>UpdateLink.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -183,7 +181,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\edit_icon.png" />
     <Content Include="Resources\edit.png" />
@@ -193,6 +190,16 @@
     <Content Include="Resources\STUTE-Logo-transparant.gif" />
     <Content Include="Resources\stute_full.ico" />
     <Content Include="Resources\STUTE_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\STUTE_Support_DLL\Database\Database.csproj">
+      <Project>{46f0c3fe-4a77-4af6-a49f-0b23b8a2f67b}</Project>
+      <Name>Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\STUTE_Support_DLL\VistaMenu\VistaMenu.csproj">
+      <Project>{e3b3f431-bd8c-4670-b081-4132f69ff21c}</Project>
+      <Name>VistaMenu</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

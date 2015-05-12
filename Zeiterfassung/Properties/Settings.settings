@@ -8,24 +8,11 @@
     <Setting Name="Version" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1.8</Value>
     </Setting>
-    <Setting Name="DebugApp" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="Build" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">$Revision: 397 $</Value>
     </Setting>
-    <Setting Name="ConnectionTimeout" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">240</Value>
-    </Setting>
-    <Setting Name="ConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=KOE-DLZ-SQL-001.stute.loc;Initial Catalog=Personal;Persist Security Info=True;User ID=sa;Password=sqlserver;Connect Timeout=120;Application Name=Zeiterfassung&lt;/ConnectionString&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=KOE-DLZ-SQL-001.stute.loc;Initial Catalog=Personal;Persist Security Info=True;User ID=sa;Password=sqlserver;Connect Timeout=120;Application Name=Zeiterfassung</Value>
-    </Setting>
-    <Setting Name="Build" Type="System.String" Scope="User">
-      <Value Profile="(Default)">$Revision: 395 $</Value>
-    </Setting>
-    <Setting Name="BuildDate" Type="System.String" Scope="User">
-      <Value Profile="(Default)">$Date: 2015-05-05 15:40:59 +0200 (Di, 05. Mai 2015) $</Value>
+    <Setting Name="BuildDate" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">$Date: 2015-05-12 19:35:40 +0200 (Di, 12. Mai 2015) $</Value>
     </Setting>
   </Settings>
 </SettingsFile>
